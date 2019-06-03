@@ -6,6 +6,7 @@ import java.util.Date
 
 import com.alibaba.fastjson.JSON
 import com.atguigu.gmall1205.common.constant.GmallConstant
+import com.atguigu.gmall1205.common.util.MyEsUtil
 import com.atguigu.gmall1205.realtime.bean.Startuplog
 import com.atguigu.gmall1205.realtime.util.{MyKafkaUtil, RedisUtil}
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -76,12 +77,15 @@ object DauApp {
       rdd.foreachPartition{startuplogItr=>
         //executor
         val jedis: Jedis = RedisUtil.getJedisClient
-        for ( startuplog<- startuplogItr ) {
+        val list: List[Startuplog] = startuplogItr.toList
+        for ( startuplog<- list ) {
           val key="dau:"+startuplog.logDate
           val value=startuplog.mid
           jedis.sadd(key,value)
           println(startuplog) //往es中保存
         }
+
+        MyEsUtil.indexBulk(GmallConstant.ES_INDEX_DAU,list)
         jedis.close()
       }
 
