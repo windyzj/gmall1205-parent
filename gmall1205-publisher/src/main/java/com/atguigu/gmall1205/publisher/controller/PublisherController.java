@@ -38,6 +38,13 @@ public class PublisherController {
         totalList.add(newMidMap);
 
 
+        Map orderAmountMap=new HashMap();
+        orderAmountMap.put("id","orderAmount");
+        orderAmountMap.put("name","新增交易额");
+        Double orderAmount = publisherService.getOrderAmount(date);
+        orderAmountMap.put("value",orderAmount);
+        totalList.add(orderAmountMap);
+
 
         return JSON.toJSONString(totalList);
     }
@@ -55,6 +62,19 @@ public class PublisherController {
             hourMap.put("today",dauHourTDMap);
             hourMap.put("yesterday",dauHourYDMap);
             return  JSON.toJSONString(hourMap);
+        }else if("orderAmount".equals(id)){
+            //今天
+            Map orderAmountHourTDMap = publisherService.getOrderAmontHourMap(today);
+            //求昨天分时明细
+            String yesterday = getYesterday(today);
+            Map orderAmountHourYDMap = publisherService.getOrderAmontHourMap(yesterday);
+
+            Map hourMap=new HashMap();
+            hourMap.put("today",orderAmountHourTDMap);
+            hourMap.put("yesterday",orderAmountHourYDMap);
+            return  JSON.toJSONString(hourMap);
+
+
         }
 
 
