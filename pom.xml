@@ -18,6 +18,7 @@
         <module>gmall1205-mock</module>
         <module>gmall1205-logger</module>
         <module>gmall1205-realtime</module>
+        <module>gmall1205-canal</module>
     </modules>
 
     <properties>
