@@ -19,6 +19,7 @@
         <module>gmall1205-logger</module>
         <module>gmall1205-realtime</module>
         <module>gmall1205-canal</module>
+        <module>gmall1205-export-sale</module>
     </modules>
 
     <properties>
