@@ -18,6 +18,8 @@
         <module>gmall1205-mock</module>
         <module>gmall1205-logger</module>
         <module>gmall1205-realtime</module>
+        <module>gmall1205-canal</module>
+        <module>gmall1205-export-sale</module>
     </modules>
 
     <properties>
@@ -81,7 +83,7 @@
                 <version>${fastjson.version}</version>
             </dependency>
 
-
+<!--------------1111111111111111111111------------->
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-core_2.11</artifactId>
